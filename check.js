@@ -17,8 +17,13 @@ async function fetchURL(url) {
 
 function printReport(text) {
   var output = JSON.parse(text);
-  for (let [key, value] of Object.entries(output["Time Series (Daily)"])) {
-    console.log(`${key} = ${JSON.stringify(value, 0, 2)}`);
-  }
+  const symbol = Object.entries(output["Meta Data"])[1][1];
+  const price = JSON.stringify(
+    Object.entries(output["Time Series (Daily)"])[0],
+    0,
+    2
+  );
+
+  console.log(`Symbol: ${symbol} Price: ${price}`);
 }
 export { fetchURL, printReport };
