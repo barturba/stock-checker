@@ -1,5 +1,5 @@
 import { argv, exit } from "node:process";
-import { fetchURL } from "./check.js";
+import { fetchURL, printReport } from "./check.js";
 async function main() {
   if (argv.length < 3) {
     console.log("number of arguments less than 1");
@@ -16,9 +16,10 @@ async function main() {
     var text = await fetchURL(
       `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSymbol}&apikey=${process.env.API_KEY}`
     );
-    console.log(`got: ${text}`);
+    printReport(text);
   } catch (error) {
     console.error(error.message);
+
     exit();
   }
 }
